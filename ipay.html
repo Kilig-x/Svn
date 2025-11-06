@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)http://ipay.test.happyapk.com:8081/iapppay/SimplePay.html -->
+<html><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="UTF-8">
+		<title>爱贝支付体验demo</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<link rel="stylesheet" href="./ipay_files/pay-index.css">
+		<link rel="stylesheet" href="./ipay_files/style.css">
+
+	</head>
+
+	<body style="padding: 0;">
+		<header>
+			<!-- <img src="./ipay_files/header_03.jpg"><h2>爱贝聚合示例-v2.0</h2> -->
+			<p>爱贝收银台</p>
+		</header>
+		<div class="main">
+				<div class="experience-pay">
+					<h2>支付体验</h2>
+					<p>爱贝体验商品</p>
+					<p>订单金额：0.01元</p>
+				</div>
+				<div class="verify-pay">
+					<input type="button" value="确认支付" class="btn-pay">
+				</div>
+
+
+			<!-- 弹出层-->
+			<div class="pattern-pay" id="pattern-pay" style="display: none;">
+				<ul id="list">
+					<li class="pay" paytype="401"><a href="javascript:;">支付宝支付</a></li>
+					<li class="pay" paytype="403"><a class="a1" href="javascript:;">微信支付</a></li>
+					<li class="pay" paytype="4"><a class="a2" paytype="4" href="javascript:;">银联卡支付</a></li>
+					<li class="pay" paytype="402"><a class="a3" paytype="402" href="javascript:;">财付通</a></li>
+					<li class="pay" paytype="103"><a class="a4" paytype="103" href="javascript:;">京东支付</a></li>
+					<li class="pay" paytype="1"><a class="a5" href="javascript:;">充值卡</a></li>
+					<li class="pay" paytype="1" style="border-bottom: none"><a class="a6" href="javascript:;">游戏点卡</a></li>
+				</ul>
+			</div>
+			<div class="more" id="more" style="display: none;">
+				<ul>
+					<li><a href="http://ipay.test.happyapk.com:8081/iapppay/LinkPay.html">爱贝收银台（标准版）</a></li>
+					<li><a href="http://ipay.test.happyapk.com:8081/iapppay/IframePay.html">爱贝收银台（iframe版）</a></li>
+					<li style="border-bottom: none"><a href="http://ipay.test.happyapk.com:8081/iapppay/DirectPay.html">爱贝收银台（直接调起版）</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="content" id="content" style="display: none;"></div>
+		<div class="more-pay">
+			<a href="javascript:;">体验更多计费方式</a>
+		</div>
+	
+	<script type="text/javascript" src="./ipay_files/jquery-1.11.3.js"></script>
+	<script src="./ipay_files/aibei_v1.1.0.js"></script>
+	<script>
+		$(document).ready(function() {
+			//点击任意处  关闭list
+			$(".content").click(function() {
+				$(".pattern-pay").hide()
+				$(this).hide()
+			});
+			//点击确认支付 list显示
+			$(".btn-pay").click(function(){
+				$("#pattern-pay").slideDown()
+				$(".content").show()
+			});
+			//点击任意处  关闭list
+			$(".content").click(function() {
+				$(".more").hide()
+				$(this).hide()
+			});
+			//点击确认支付 list显示
+			$(".more-pay").click(function(){
+				$("#more").slideDown();
+				$(".content").show()
+			});
+			$(".pay").click(function(){
+				var target = $(this);
+				var paytype = target.attr("paytype");
+				IAPPPAY.invokeDirectPay("/iapppay/CpServerServlet","6", "appuserid",paytype,"0.01","SimplePay");
+			});
+		});
+
+	</script>
+</body></html>

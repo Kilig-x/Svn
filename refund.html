@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>tab页效果</title>
+<script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+<style type="text/css">
+.wrap{border: 1px solid #eee;min-width: 400px; min-height: 400px;}
+.tab span{border: 1px solid #ccc;width: 100px;height: 30px;padding-left:0px;margin: 10PX 10PX;}
+.info{border: 1px dashed    #006400 ;margin: 20px 0px;}
+.h30{height: 30px;}
+.huangse{background-color:#FFFF00 ;}
+.qianlv{background-color: #F5FFFA ;}
+</style>
+</head>
+<body>
+<!-- tab页切换开始-->
+<div class="wrap">
+<div class="h30"></div>
+<!-- tab切换源start -->
+<div class="tab">
+<span class="huangse">中文版tab</span>
+<span class="">英文版tab</span>
+<span class="">韩语版tab</span>
+</div>
+<!-- tab切换源end -->
+<!-- 切换显示start -->
+<div class="info">
+<p>1.info one</p>
+<p>2.中文版</p>
+</div>
+<div class="info" style="display: none">
+<p>1.info two</p>
+<p>2.英文版</p>
+</div>
+<div class="info" style="display: none">
+<p>1.info three</p>
+<p>2.韩语版</p>
+</div>
+<!-- 切换显示end -->
+</div>
+<!-- tab页切换结束-->
+</body>
+<script type="text/javascript">
+$(function(){
+/****遍历*****/
+$(".wrap").find(".tab span").each(function(index,element){
+/****绑定事件*******/
+$(this).mousemove(function(e){
+/****触发事件的显示控制****/
+$(this).addClass("huangse").siblings().removeClass();
+$(this).parent().parent().find(".info").eq(index).show().siblings(".info").hide();
+})
+})
+})
+</script>
+</html>

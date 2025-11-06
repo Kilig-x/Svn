@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>页面弹出框</title>
+        <style>
+            #popUpBox{
+                display: none;
+                width: 500px;
+                height: 446px;
+              	position:absolute;left:50%; top:50%;
+                transform:translate(-50%,-50%);
+                background: url("images/title_bg.png") no-repeat;
+                background-color: yellow;
+                z-index:2;
+            }
+            #maskBox{
+                background: none repeat scroll 0 0 #000; 
+			    display: none; 
+			    height: 100%; 
+			    left: 0; 
+			    opacity: 0.4; 
+			    position: fixed; 
+			    top: 0; 
+			    width: 100%; 
+			    z-index: 1;
+            }            
+            #BoxHead{
+                /*文字水平居中*/
+                text-align: center;
+                color: #FFCBB9;
+                /*宽度继承popUpBox的,不需要设置*/
+                height: 40px;
+                border: 0px solid black;
+            }
+            #BoxHead>*{
+                /*只有一行,将line-heigh的数值设置的和父容器的高度一样*/
+                /*可以实现垂直居中*/
+                line-height: 40px;
+            }
+             #BoxFooter{
+                /*文字水平居中*/
+                text-align: center;
+                color: #FFCBB9;
+                /*宽度继承popUpBox的,不需要设置*/
+                height: 14px;
+                border: 0px solid black;
+                background-image: url("images/pay_end_bg.png");
+            }
+            .btn-close {
+			list-style-type: none;			
+			background-size: 100% 100%;			
+			width: 40px;
+			height: 40px;
+			right: 0%;
+			top: 0%;
+			background-image: url("images/title_close.png");
+			background-repeat: no-repeat;
+			position: absolute;
+		}
+		</style>
+    </head>
+    <body>
+        <button id="ShowBox" onclick="ShowBox('popUpBox')">点击显示弹出框</button>
+        <div id="maskBox"></div>       
+        <div id="popUpBox">
+            <!--弹出框的头部，里面有弹出框标题和关闭按钮-->
+            <div id="BoxHead">
+                <label>支付界面</label>
+                <a href="javascript:void(0)" onclick="HideBox('popUpBox')"><span class="btn-close"> </span></a>
+            </div>
+            <!--弹出框的主体部分-->
+            <div id="BoxBody"><iframe id="iframe1" name="iframe1" src="#" width="500px" height="400px"
+				frameborder="0" scrolling="no"></iframe></div>
+            <!--弹出框的底部，可以加一些功能按钮，比如说保存按钮-->
+            <div id="BoxFooter"></div>
+        </div>
+    </body>
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js" ></script>
+    <script>
+        function ShowBox(BoxID){
+            //获取页面要显示的弹出框的id
+            var popBox = $("#"+BoxID);
+            //用show()方法使其显示出来
+            popBox.show();
+            var maskBox = $("#maskBox");
+            maskBox.show();
+            var url="http://oppay.coofun.cn/";
+            document.getElementById('iframe1').setAttribute('src',
+					url);
+        }
+        function HideBox(BoxID){
+            //获取页面要隐藏的弹出框的id
+            var popBox = $("#"+BoxID);
+            //用hide()方法使其隐藏
+            popBox.hide();
+            var maskBox = $("#maskBox");
+            maskBox.hide();
+        }
+    </script>
+</html>
